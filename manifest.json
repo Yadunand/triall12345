@@ -1,0 +1,26 @@
+{
+	"name": "PokeStalgia",
+	"version": "0.1",
+	"manifest_version": 2,
+	"description": "Bring the hunt for pokemon to your browser.",
+	"content_scripts": [{
+      "matches": ["<all_urls>"],
+      "js": ["gen.js"],
+      "run_at": "document_idle",
+      "all_frames": false
+   }],
+	"background": {
+		"scripts": ["background.js"]
+	},
+	"browser_action": {
+		"default_icon": "icon.png",
+		"default_title": "Bring the hunt for pokemon to your browser.",
+		"default_popup": "extension.html"
+	},
+	"content_security_policy": "script-src 'self' https://www.google.com; object-src 'self'",
+	"icons": {
+		"128": "icon.png"
+	},
+	"permissions": ["activeTab", "tabs"],
+	"web_accessible_resources": ["main.js", "gen.js"]
+}
