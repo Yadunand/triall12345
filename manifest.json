@@ -5,7 +5,7 @@
 	"description": "Bring the hunt for pokemon to your browser.",
 	"content_scripts": [{
       "matches": ["<all_urls>"],
-      "js": ["gen.js"],
+      "js": ["pokemon.js", "pokestalgia.js"],
       "run_at": "document_idle",
       "all_frames": false
    }],
@@ -22,5 +22,5 @@
 		"128": "icon.png"
 	},
 	"permissions": ["activeTab", "tabs"],
-	"web_accessible_resources": ["main.js", "gen.js"]
+	"web_accessible_resources": ["main.js", "pokestalgia.js"]
 }
