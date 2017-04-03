@@ -22,5 +22,5 @@
 		"128": "icon.png"
 	},
 	"permissions": ["activeTab", "tabs"],
-	"web_accessible_resources": ["main.js", "pokestalgia.js"]
+	"web_accessible_resources": ["main.js", "pokestalgia.js", "sprites/*.png", "1.png"]
 }
