@@ -4,18 +4,15 @@ function generatePokemonImageElement(pokemonId, level) {
 	var image = document.createElement("IMG");
 	// Set the image source and tooltip.
 	image.setAttribute("title", pokemon[pokemonId - 1].name +  " :L" + level);
-	var spriteURL = chrome.extension.getURL("sprites/" + pokemonId + ".png");
+	var spriteURL = chrome.extension.getURL("resources/sprites/" + pokemonId + ".png");
 	image.setAttribute("src", spriteURL);
-	// Add a click listener for the pokemon image.
-	image.onclick = function() { onPokemonClick(pokemonId) };
 	// Return the element.
 	return image;
 };
 
-function onPokemonClick(pokemonId) {
-	alert("clicked!");
-};
-
+/**
+ * Handle a tab load event.
+ */
 function onTabLoad() {
 	// Get the id of a random pokemon.
 	var randomPokemon = pokemon[Math.floor(Math.random() * 151)];
@@ -24,10 +21,26 @@ function onTabLoad() {
 	// If there are no divs then give up.
 	if(divs.length === 0) 
 		return;
-	// Get a random div and inject our pokemon into it.
-	divs[Math.floor(Math.random() * divs.length)].appendChild(generatePokemonImageElement(randomPokemon.id, 1));
+	// Get a random div to inject our pokemon into.
+	var targetDiv = divs[Math.floor(Math.random() * divs.length)];
+	// Get the image to inject.
+	var pokemonImg = generatePokemonImageElement(randomPokemon.id, 1);
+	// Inject the pokemon into the div.
+	targetDiv.appendChild(pokemonImg);
+	// Add a click listener for the pokemon image.
+	pokemonImg.onclick = function() {
+		 // Alert background.js that we have caught a pokemon.
+		chrome.runtime.sendMessage({ action: "onCatch", pokemonId: randomPokemon.id, pokemonLevel: 1 }, function(response) {
+			console.log("response: " + JSON.stringify(response));
+			// Remove the pokemon from the DOM.
+			targetDiv.removeChild(pokemonImg);
+		}); 
+	};
 };
 
+/**
+ * Listen for runtime messages.
+ */
 chrome.runtime.onMessage.addListener(function(msg, sender, sendResponse) {
 	if (msg.action == 'tabLoad') {
 	  onTabLoad();

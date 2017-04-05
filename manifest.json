@@ -10,17 +10,17 @@
       "all_frames": false
    }],
 	"background": {
-		"scripts": ["background.js"]
+		"scripts": ["pokemon.js", "pokedexRepository.js", "background.js"]
 	},
 	"browser_action": {
-		"default_icon": "icon.png",
+		"default_icon": "resources/icon.png",
 		"default_title": "Bring the hunt for pokemon to your browser.",
-		"default_popup": "extension.html"
+		"default_popup": "pokedex.html"
 	},
 	"content_security_policy": "script-src 'self' https://www.google.com; object-src 'self'",
 	"icons": {
-		"128": "icon.png"
+		"128": "resources/icon.png"
 	},
-	"permissions": ["activeTab", "tabs"],
-	"web_accessible_resources": ["main.js", "pokestalgia.js", "sprites/*.png", "1.png"]
+	"permissions": ["activeTab", "tabs", "storage"],
+	"web_accessible_resources": ["pokestalgia.js", "resources/*"]
 }

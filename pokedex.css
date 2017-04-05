@@ -1,0 +1,12 @@
+html {
+    width: 450px;
+    height: 280px;
+}
+
+body {
+    width: 450px;
+    height: 280px;
+    background-image: url("resources/pokedex_background.png");
+    background-size: 450px 300px;
+    background-repeat: no-repeat;
+}
