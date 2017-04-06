@@ -19,8 +19,8 @@ function populatePokedex(data) {
        pokedexListContainer.appendChild(createPokedexListItem(data.pokemon[id-1], data.captureInfo[id]));
     }
 
-    // ...
-
+    // Then set the trainer stats.
+    populateTrainerStats(data.trainerLevel, data.owned);
 }
 
 /**
@@ -52,6 +52,14 @@ function createPokedexListItem(pokemon, captureData) {
     }
     // Return our created list item.
     return item;
+}
+
+/**
+ * Populate the pokedex trainer stats.
+ */
+function populateTrainerStats(level, caught) {
+    var pokedexTrainerStatsContainer = document.getElementById("pokedex-trainer-details-container");
+    pokedexTrainerStatsContainer.innerHTML = "<p>LEVEL. " + level + "<br><p>OWN " + caught + "/151</p>" 
 }
 
 /**

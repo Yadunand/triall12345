@@ -58,3 +58,17 @@ body {
     height: 100%;
     float: right;
 }
+
+#pokedex-details-container {
+    width: 40%; 
+    height: 100%;
+    float: right;
+}
+
+#pokedex-trainer-details-container {
+    width: 100%; 
+}
+
+#pokedex-pokemon-details-container {
+    width: 100%; 
+}
