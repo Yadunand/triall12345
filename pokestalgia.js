@@ -29,7 +29,7 @@ function onTabLoad() {
 	targetDiv.appendChild(pokemonImg);
 	// Add a click listener for the pokemon image.
 	pokemonImg.onclick = function() {
-		 // Alert background.js that we have caught a pokemon.
+		// Alert background.js that we have caught a pokemon.
 		chrome.runtime.sendMessage({ action: "onCatch", pokemonId: randomPokemon.id, pokemonLevel: 1 }, function(response) {
 			console.log("response: " + JSON.stringify(response));
 			// Remove the pokemon from the DOM.

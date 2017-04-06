@@ -18,15 +18,21 @@ chrome.tabs.onUpdated.addListener( function (tabId, changeInfo, tab) {
  */
 chrome.runtime.onMessage.addListener(
   function(msg, sender, sendResponse) {
-
     // Listen for messages sent when a pokemon is caught.
     if (msg.action == "onCatch") {
-
       // Persist this information to storage.
       repository.addCaughtPokemon(msg.pokemonId, msg.pokemonLevel);
-
       // Send a response.
       sendResponse(repository.getAllCaughtPokemonDetails());
     }
-    
+    // Listen for requests from the pokedex popup script for capture data.
+    if (msg.action == "pokedexDataRequest") {
+      // Send the requested data in the response.
+      sendResponse({
+        pokemon: pokemon,
+        captureInfo: repository.getAllCaughtPokemonDetails(),
+        trainerLevel: 1, // TODO Figure a way to calculate this.
+        owned: repository.getOwnedCount()
+      });
+    }
 });

@@ -146,7 +146,13 @@ var pokemon = [
     "info": "Pidgeotto claims a large area as its own territory. This Pokémon flies around, patrolling its living space. If its territory is violated, it shows no mercy in thoroughly punishing the foe with its sharp claws."
   },
   {
-    "id": 18
+    "id": 18,
+    "name": "Pidgeot",
+    "types": [
+      "Normal",
+      "Flying"
+    ],
+    "info": "When hunting, it skims the surface of water at high speed to pick off unwary prey such as MAGIKARP."
   },
   {
     "id": 19,
@@ -1157,7 +1163,13 @@ var pokemon = [
     "info": "Omanyte is one of the ancient and long-since-extinct Pokémon that have been regenerated from fossils by people. If attacked by an enemy, it withdraws itself inside its hard shell."
   },
   {
-    "id": 139
+    "id": 139,
+    "name": "Omastar",
+    "types": [
+      "Rock",
+      "Water"
+    ],
+    "info": "A prehistoric POKéMON that died out when its heavy shell made it impossible to catch prey."
   },
   {
     "id": 140,

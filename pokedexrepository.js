@@ -40,6 +40,13 @@ function PokedexRepository () {
     }
 
     /**
+     * Get the number of unique pokemon owned.
+     */
+    this.getOwnedCount = function () {
+        return Object.keys(cachedCaptureDetails).length;
+    }
+
+    /**
      * Add a caught pokemon to storage.
      */
     this.addCaughtPokemon = function (id, level) {

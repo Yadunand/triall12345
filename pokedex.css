@@ -1,3 +1,12 @@
+@font-face {
+   font-family: 'pokefont';
+   src: url("resources/fonts/Pokemon GB.ttf") format('truetype');
+}
+
+::-webkit-scrollbar { 
+    display: none; 
+}
+
 html {
     width: 450px;
     height: 280px;
@@ -9,4 +18,43 @@ body {
     background-image: url("resources/pokedex_background.png");
     background-size: 450px 300px;
     background-repeat: no-repeat;
+}
+
+#pokedex-container {
+    font-family: 'pokefont', san-serif; 
+    width: 100%; 
+    height: 100%;
+}
+
+#pokedex-list-container {
+    width: 52%; 
+    height: 100%;
+    float: left;
+    overflow: auto;
+}
+
+.pokedex-list-item {
+    width: 100%; 
+    height: 10%;
+    float: left;
+}
+
+.pokedex-list-item-id-container {
+    font-size: 1.05em;
+    width: 20%; 
+    height: 100%;
+    float: left;
+}
+
+.pokedex-list-item-pokeball-container {
+    width: 5%; 
+    height: 100%;
+    float: left;
+}
+
+.pokedex-list-item-name-container {
+    font-size: 1.1em;
+    width: 75%; 
+    height: 100%;
+    float: right;
 }
