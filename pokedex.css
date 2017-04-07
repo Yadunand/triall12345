@@ -67,8 +67,32 @@ body {
 
 #pokedex-trainer-details-container {
     width: 100%; 
+    overflow: hidden;
+}
+
+#pokedex-pokemon-image-container {
+    padding-top: 15px;
+    width: 100%; 
+}
+
+.pokedex-pokemon-image {
+    width: 40%;
+    margin-left: 22%;
 }
 
 #pokedex-pokemon-details-container {
+    font-size: 0.9em;
+    line-height: 1.2em;
+    width: 95%; 
+}
+
+#pokedex-pokemon-details-container-wrapper {
+    height: 45%;
     width: 100%; 
+    overflow: auto;
+}
+
+.poke-info {
+    font-size: 0.85em;
+    line-height: 1.2em;
 }

@@ -66,7 +66,18 @@ function populateTrainerStats(level, caught) {
  * Called when a caught pokemon entry is clicked.
  */
 function onPokedexEntryClick(pokemon, captureData) {
-     alert(pokemon.name);
+    // Create the pokmeon image to display.
+    var image       = document.createElement("IMG");
+    var spriteURL   = chrome.extension.getURL("resources/sprites/" + pokemon.id + ".png");
+    image.className = "pokedex-pokemon-image";
+	image.setAttribute("src", spriteURL);
+    // Clear any previous image.
+    document.getElementById("pokedex-pokemon-image-container").innerHTML = "";
+    // Add the pokemon image to the pokedex. 
+    document.getElementById("pokedex-pokemon-image-container").appendChild(image);
+    // Set the pokemon info.
+    var info = "<p>HIGHEST Lv. " + captureData.highestlvl + "</p><p>CAUGHT." + captureData.count + "</p><p class=\"poke-info\">" + pokemon.info + "</p>";
+    document.getElementById("pokedex-pokemon-details-container").innerHTML = info;
 }
 
 /**
