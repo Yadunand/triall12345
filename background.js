@@ -1,5 +1,3 @@
-// Create a new pokedex repository.
-var repository = new PokedexRepository();
 
 /**
  * Listen for tab loaded events.
@@ -35,4 +33,18 @@ chrome.runtime.onMessage.addListener(
         owned: repository.getOwnedCount()
       });
     }
+    // Listen for capture details updates.
+    if (msg.action == 'onCaptureDetailsUpdated') {
+      // There is a change in the number of pokemon we have.
+      // Let the generator know so that it can repopulate its 
+      // ticket list as we may have caught anough pokemon to
+      // unlock that pokemons evolution.
+      pokemonGenerator.populateTicketCache(repository.getAllCaughtPokemonDetails());
+    }
 });
+
+// The pokedex repository.
+var repository = new PokedexRepository();
+
+// The pokemon generator.
+var pokemonGenerator = new PokemonGenerator();

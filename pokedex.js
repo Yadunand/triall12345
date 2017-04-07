@@ -18,7 +18,6 @@ function populatePokedex(data) {
     for (var id = 1; id <= 151; id++) {
        pokedexListContainer.appendChild(createPokedexListItem(data.pokemon[id-1], data.captureInfo[id]));
     }
-
     // Then set the trainer stats.
     populateTrainerStats(data.trainerLevel, data.owned);
 }

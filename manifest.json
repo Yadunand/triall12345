@@ -10,7 +10,12 @@
       "all_frames": false
    }],
 	"background": {
-		"scripts": ["pokemon.js", "pokedexRepository.js", "background.js"]
+		"scripts": [
+			"pokemon.js", 
+			"pokemongenerator.js", 
+			"pokedexrepository.js", 
+			"background.js"
+		]
 	},
 	"browser_action": {
 		"default_icon": "resources/icon.png",

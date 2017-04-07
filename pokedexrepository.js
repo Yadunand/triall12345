@@ -21,6 +21,8 @@ function PokedexRepository () {
                 }
             }
             cachedCaptureDetails = detailsContainer;
+            // We need to notify listeners that the capture details have changed.
+            chrome.runtime.sendMessage({ action: "onCaptureDetailsUpdated" }, function() {}); 
         });
     }
 
