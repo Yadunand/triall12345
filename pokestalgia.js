@@ -15,7 +15,7 @@ function generatePokemonImageElement(pokemonId, level) {
  */
 function onTabLoad() {
 	// Send a request for a random pokemon.
-	chrome.runtime.sendMessage({ action: "requestPokemonDraw" }, function(randomPokemon) {
+	chrome.runtime.sendMessage({ action: "requestPokemonDraw" }, function(winner) {
 		// Get all divs in the DOM.
 		var divs = document.getElementsByTagName("div");
 		// If there are no divs then give up.
@@ -24,13 +24,13 @@ function onTabLoad() {
 		// Get a random div to inject our pokemon into.
 		var targetDiv = divs[Math.floor(Math.random() * divs.length)];
 		// Get the image to inject.
-		var pokemonImg = generatePokemonImageElement(randomPokemon.id, 1);
+		var pokemonImg = generatePokemonImageElement(winner.pokemon.id, winner.level);
 		// Inject the pokemon into the div.
 		targetDiv.appendChild(pokemonImg);
 		// Add a click listener for the pokemon image.
 		pokemonImg.onclick = function() {
 			// Alert background.js that we have caught a pokemon.
-			chrome.runtime.sendMessage({ action: "onCatch", pokemonId: randomPokemon.id, pokemonLevel: 1 }, function() {
+			chrome.runtime.sendMessage({ action: "onCatch", pokemonId: winner.pokemon.id, pokemonLevel: winner.level }, function() {
 				// Remove the pokemon from the DOM.
 				targetDiv.removeChild(pokemonImg);
 			}); 

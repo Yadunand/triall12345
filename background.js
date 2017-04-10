@@ -34,13 +34,13 @@ chrome.runtime.onMessage.addListener(
       sendResponse({
         pokemon: pokemon,
         captureInfo: repository.getAllCaughtPokemonDetails(),
-        trainerLevel: 1, // TODO Figure a way to calculate this.
+        trainerLevel: repository.getTrainerLevel(),
         owned: repository.getOwnedCount()
       });
     }
     // Listen for requests for a random pokemon.
     if (msg.action == "requestPokemonDraw") {
-      // Respond with a random pokemon.
+      // Respond with a random pokemon and level.
       sendResponse(pokemonGenerator.draw());
     }
 });

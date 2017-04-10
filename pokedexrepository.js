@@ -4,6 +4,8 @@
 function PokedexRepository () {
     // The most up-to-date snapshot of all caught pokemon details. Updated dynamically.
     var cachedCaptureDetails = {};
+    // The trainer level.
+    var trainerlevel;
 
     /**
      * Populate the capture details cache with the most up-to-date capture info from storage. 
@@ -23,7 +25,45 @@ function PokedexRepository () {
             cachedCaptureDetails = detailsContainer;
             // We need to notify listeners that the capture details have changed.
             chrome.runtime.sendMessage({ action: "onCaptureDetailsUpdated", details: cachedCaptureDetails }, function() {}); 
+            // Update the trainer level which is dependent on the caught pokemon.
+            calculateTrainerLevel();
         });
+    };
+
+    /**
+     * Calculate the trainer level. This is dependent on pokemon caught.
+     */
+    var calculateTrainerLevel = function () {
+        // Get the highest levels of all caught pokemon.
+        var pokemonHighestLevels = [];
+        for (var id = 1; id <= 151; id++) {
+            // Try to get capture info regarding this pokemon from storage.
+            var captureDetails = cachedCaptureDetails[id];
+            // If we have caught this pokemon the add its highest level to the list of pokemon levels.
+            if (captureDetails) 
+                pokemonHighestLevels.push(captureDetails.highestlvl);
+        }
+        // Sort the level list smallest to highest.
+        pokemonHighestLevels = pokemonHighestLevels.sort(function(a,b) { return a - b; });
+        // Restrict the list to the highest 10.
+        pokemonHighestLevels = pokemonHighestLevels.slice(pokemonHighestLevels.length - 10);
+        // The trainer level is the average of the top 10 highest pokemon levels.
+        var levelSum = 0;
+        for (var i = 0; i < pokemonHighestLevels.length; i++)
+            levelSum += pokemonHighestLevels[i];
+        // Set the trainer level. Handle situation where we have caught no pokemon.
+        if (levelSum == 0) {
+            trainerlevel = 1;
+        } else {
+            trainerlevel = Math.floor(levelSum/pokemonHighestLevels.length);
+        }
+    };
+
+    /**
+     * Get the trainer level.
+     */
+    this.getTrainerLevel = function () {
+        return trainerlevel;
     };
 
     /**
