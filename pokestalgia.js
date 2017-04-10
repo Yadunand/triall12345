@@ -14,28 +14,28 @@ function generatePokemonImageElement(pokemonId, level) {
  * Handle a tab load event.
  */
 function onTabLoad() {
-	// Get the id of a random pokemon.
-	var randomPokemon = pokemon[Math.floor(Math.random() * 151)];
-	// Get all divs in the DOM.
-	var divs = document.getElementsByTagName("div");
-	// If there are no divs then give up.
-	if(divs.length === 0) 
-		return;
-	// Get a random div to inject our pokemon into.
-	var targetDiv = divs[Math.floor(Math.random() * divs.length)];
-	// Get the image to inject.
-	var pokemonImg = generatePokemonImageElement(randomPokemon.id, 1);
-	// Inject the pokemon into the div.
-	targetDiv.appendChild(pokemonImg);
-	// Add a click listener for the pokemon image.
-	pokemonImg.onclick = function() {
-		// Alert background.js that we have caught a pokemon.
-		chrome.runtime.sendMessage({ action: "onCatch", pokemonId: randomPokemon.id, pokemonLevel: 1 }, function(response) {
-			console.log("response: " + JSON.stringify(response));
-			// Remove the pokemon from the DOM.
-			targetDiv.removeChild(pokemonImg);
-		}); 
-	};
+	// Send a request for a random pokemon.
+	chrome.runtime.sendMessage({ action: "requestPokemonDraw" }, function(randomPokemon) {
+		// Get all divs in the DOM.
+		var divs = document.getElementsByTagName("div");
+		// If there are no divs then give up.
+		if(divs.length === 0) 
+			return;
+		// Get a random div to inject our pokemon into.
+		var targetDiv = divs[Math.floor(Math.random() * divs.length)];
+		// Get the image to inject.
+		var pokemonImg = generatePokemonImageElement(randomPokemon.id, 1);
+		// Inject the pokemon into the div.
+		targetDiv.appendChild(pokemonImg);
+		// Add a click listener for the pokemon image.
+		pokemonImg.onclick = function() {
+			// Alert background.js that we have caught a pokemon.
+			chrome.runtime.sendMessage({ action: "onCatch", pokemonId: randomPokemon.id, pokemonLevel: 1 }, function() {
+				// Remove the pokemon from the DOM.
+				targetDiv.removeChild(pokemonImg);
+			}); 
+		};
+	}); 
 };
 
 /**

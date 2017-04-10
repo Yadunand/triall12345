@@ -1,3 +1,8 @@
+// The pokedex repository.
+var repository = new PokedexRepository();
+
+// The pokemon generator.
+var pokemonGenerator = new PokemonGenerator(repository);
 
 /**
  * Listen for tab loaded events.
@@ -20,8 +25,8 @@ chrome.runtime.onMessage.addListener(
     if (msg.action == "onCatch") {
       // Persist this information to storage.
       repository.addCaughtPokemon(msg.pokemonId, msg.pokemonLevel);
-      // Send a response.
-      sendResponse(repository.getAllCaughtPokemonDetails());
+      // The number of pokemon we own has changed, update the generator ticket cache.
+      pokemonGenerator.populateTicketCache();
     }
     // Listen for requests from the pokedex popup script for capture data.
     if (msg.action == "pokedexDataRequest") {
@@ -33,18 +38,9 @@ chrome.runtime.onMessage.addListener(
         owned: repository.getOwnedCount()
       });
     }
-    // Listen for capture details updates.
-    if (msg.action == 'onCaptureDetailsUpdated') {
-      // There is a change in the number of pokemon we have.
-      // Let the generator know so that it can repopulate its 
-      // ticket list as we may have caught anough pokemon to
-      // unlock that pokemons evolution.
-      pokemonGenerator.populateTicketCache(repository.getAllCaughtPokemonDetails());
+    // Listen for requests for a random pokemon.
+    if (msg.action == "requestPokemonDraw") {
+      // Respond with a random pokemon.
+      sendResponse(pokemonGenerator.draw());
     }
 });
-
-// The pokedex repository.
-var repository = new PokedexRepository();
-
-// The pokemon generator.
-var pokemonGenerator = new PokemonGenerator();

@@ -22,9 +22,9 @@ function PokedexRepository () {
             }
             cachedCaptureDetails = detailsContainer;
             // We need to notify listeners that the capture details have changed.
-            chrome.runtime.sendMessage({ action: "onCaptureDetailsUpdated" }, function() {}); 
+            chrome.runtime.sendMessage({ action: "onCaptureDetailsUpdated", details: cachedCaptureDetails }, function() {}); 
         });
-    }
+    };
 
     /**
      * Get capture information from storage for a pokemon.
@@ -32,21 +32,21 @@ function PokedexRepository () {
      */
     this.getCaughtPokemonDetails = function (id) {
         return cachedCaptureDetails[id];
-    }
+    };
 
     /**
      * Get capture information information from storage for all pokemon.
      */
     this.getAllCaughtPokemonDetails = function () {
         return cachedCaptureDetails;
-    }
+    };
 
     /**
      * Get the number of unique pokemon owned.
      */
     this.getOwnedCount = function () {
         return Object.keys(cachedCaptureDetails).length;
-    }
+    };
 
     /**
      * Add a caught pokemon to storage.
@@ -69,7 +69,7 @@ function PokedexRepository () {
         chrome.storage.sync.set(captureDetailsContainer, function() { });
         // Update the capture details cache.
         populateCaptureDetailsCache();
-    }
+    };
 
     // Set the intial capture details cache.
     populateCaptureDetailsCache();
