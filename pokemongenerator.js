@@ -26,8 +26,8 @@ function PokemonGenerator(repository) {
 		// If the ticket cache is empty then it needs to be populated.
 		if (ticketCache.length == 0)
 			this.populateTicketCache();
-		// Generate a level for the pokemon, can be up to 4 levels higher than trainer level.
-		var levels = [0,0,0,0,0,0,0,0,1,1,1,1,1,1,2,2,2,3,3,4];
+		// Generate a level for the pokemon, can be up to 3 levels higher than trainer level.
+		var levels = [0,0,0,0,0,0,0,0,1,1,1,1,1,1,2,2,3];
 		// Return the winning pokemon and it's level.
 		return {
 			pokemon: pokemon[ticketCache[Math.floor(Math.random() * ticketCache.length)]-1],
