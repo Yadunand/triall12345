@@ -8,15 +8,15 @@
 }
 
 html {
-    width: 450px;
+    width: 500px;
     height: 280px;
 }
 
 body {
-    width: 450px;
+    width: 500px;
     height: 280px;
     background-image: url("resources/pokedex_background.png");
-    background-size: 450px 300px;
+    background-size: 500px 300px;
     background-repeat: no-repeat;
 }
 
@@ -27,7 +27,7 @@ body {
 }
 
 #pokedex-list-container {
-    width: 52%; 
+    width: 50%; 
     height: 100%;
     float: left;
     overflow: auto;
@@ -72,7 +72,7 @@ body {
 }
 
 #pokedex-details-container {
-    width: 40%; 
+    width: 45%; 
     height: 100%;
     float: right;
 }
@@ -88,8 +88,8 @@ body {
 }
 
 .pokedex-pokemon-image {
-    width: 40%;
-    margin-left: 22%;
+    width: 30%;
+    margin-left: 28%;
 }
 
 #pokedex-pokemon-details-container {
@@ -100,11 +100,12 @@ body {
 
 #pokedex-pokemon-details-container-wrapper {
     height: 45%;
-    width: 100%; 
+    width: 95%; 
     overflow: auto;
 }
 
 .poke-info {
     font-size: 0.85em;
     line-height: 1.2em;
+    text-align: justify;
 }

@@ -77,7 +77,9 @@ function onPokedexEntryClick(pokemon, captureData) {
     // Add the pokemon image to the pokedex. 
     document.getElementById("pokedex-pokemon-image-container").appendChild(image);
     // Set the pokemon info.
-    var info = "<p>HIGHEST Lv. " + captureData.highestlvl + "</p><p>CAUGHT." + captureData.count + "</p><p class=\"poke-info\">" + pokemon.info + "</p>";
+    var info = "<p>HIGHEST Lv. " + captureData.highestlvl + "</p><p>CAUGHT." + captureData.count + 
+    "</p><p class=\"poke-info\">" + pokemon.info + "</p>" + 
+    "</p><p class=\"poke-info\">TYPE. <b>" + pokemon.types.join(" ,") + "</b></p>";
     document.getElementById("pokedex-pokemon-details-container").innerHTML = info;
 }
 
