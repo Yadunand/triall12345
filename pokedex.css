@@ -39,6 +39,11 @@ body {
     float: left;
 }
 
+.pokedex-list-item p {
+    line-height: 28px;
+    margin: 0px;
+}
+
 .pokedex-list-item-id-container {
     font-size: 1.05em;
     width: 20%; 
@@ -50,6 +55,13 @@ body {
     width: 5%; 
     height: 100%;
     float: left;
+}
+
+.pokedex-list-item-pokeball-container.caught  {
+    background-image: url("resources/pokeball.png");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center; 
 }
 
 .pokedex-list-item-name-container {
