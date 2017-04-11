@@ -39,14 +39,16 @@ function createPokedexListItem(pokemon, captureData) {
     item.appendChild(itemNameContainer);
     // Set the padded pokemon id. 
     itemIdContainer.innerHTML = "<p>"+ applyPokemonIdPadding(pokemon.id) +"</p>";
-    // If we have capture data add the 'caught' class to the itemPokeballContainer for pokeball background.
-    if (captureData)
-        itemPokeballContainer.className = itemPokeballContainer.className += " caught";
     // If we have capture data then we have caught this pokemon, otherwise it is an empty slot.
     var pokemonName = captureData ? pokemon.name.toUpperCase() : "-------------";
     itemNameContainer.innerHTML = "<p>"+ pokemonName +"</p>";
-    // Add a click listener for the pokemon entry, only if there is one.
+    // If we have capture data ...
     if (captureData) {
+        // ... add the 'caught' class to the itemPokeballContainer for pokeball background.
+        itemPokeballContainer.className = itemPokeballContainer.className += " caught";
+        // ... make the cursor a pointer for selecting caught pokemon.
+        item.style.cursor = "pointer";
+        // ... add a click listener for the pokemon entry.
         item.onclick = function() { onPokedexEntryClick(pokemon, captureData); };
     }
     // Return our created list item.
