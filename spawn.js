@@ -4,6 +4,8 @@
 function Spawn(id, level, target) {
     // The pokemon sprite.
     var sprite;
+    // The pokemon capture bar.
+    var captureBar;
 
     /**
      * Initialise this pokemon spawn.
@@ -37,28 +39,40 @@ function Spawn(id, level, target) {
 	 * Called when the sprite is clicked on.
 	 */
 	var onCaptureAttempt = function () {
-
-        // TODO Check the capture pointer is in the sweet spot. If not then drop out and may make pokemon run.
-
-		// Alert background.js that we have caught a pokemon.
-        chrome.runtime.sendMessage({ action: "onCatch", pokemonId: id, pokemonLevel: level }, function() {
-            // Remove the pokemon from the DOM.
-            target.removeChild(sprite);
-        }); 
+        // Check the capture pointer is in the sweet spot. If not then drop out and may make pokemon run.
+        if (captureBar && captureBar.isInCapturePosition()) {
+            // Alert background.js that we have caught a pokemon.
+            chrome.runtime.sendMessage({ action: "onCatch", pokemonId: id, pokemonLevel: level }, function() {
+                // Remove the pokemon from the DOM.
+                target.removeChild(sprite);
+                // We no longer need the capture bar.
+                hideCaptureBar();
+            });
+        } else {
+            // We missed our shot, will the pokemon run away?
+        }
 	};
 
 	/**
 	 * Show the capture bar.
 	 */
 	var showCaptureBar = function () {
-        console.log("OVER");
+        // Create the capture bar.
+        captureBar = new CaptureBar("easy");
+        // Start the capture bar pointer tick.
+        captureBar.startPointerTick();
 	};
 
     /**
 	 * Hide the capture bar.
 	 */
 	var hideCaptureBar = function () {
-		console.log("OUT");
+        // Check that we have a capture bar, just in case.
+        if (captureBar) {
+            // Stop the capture bar pointer tick.
+            captureBar.stopPointerTick();
+            captureBar = null;
+        }
 	};
 
     init();
