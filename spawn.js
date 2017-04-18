@@ -4,6 +4,8 @@
 function Spawn(id, level, target) {
     // The pokemon sprite.
     var sprite;
+    // The pokemon sprite container.
+    var spriteContainer;
     // The pokemon capture bar.
     var captureBar;
 
@@ -13,14 +15,19 @@ function Spawn(id, level, target) {
     var init = function () {
         // Create the pokemon spawn sprite.
         createPokemonSprite();
-        // Inject the sprite into the target div.
-		target.appendChild(sprite);
+        // Create a container for the sprite.
+        spriteContainer           = document.createElement("DIV");
+        spriteContainer.className = "spawn-container";
+        // Inject the sprite into the target container.
+		spriteContainer.appendChild(sprite);
+        // Inject the sprite container into the target div.
+		target.appendChild(spriteContainer);
         // Add a click listener for the pokemon image.
 		sprite.addEventListener("click", onCaptureAttempt);
         // Show the capture bar when the sprite is hovered over.
         sprite.addEventListener("mouseover", showCaptureBar);
         // Hise the capture bar when the sprite is not hovered over.
-        sprite.addEventListener("mouseout", hideCaptureBar);
+        //sprite.addEventListener("mouseout", hideCaptureBar);
     };
 
 	/**
@@ -44,7 +51,7 @@ function Spawn(id, level, target) {
             // Alert background.js that we have caught a pokemon.
             chrome.runtime.sendMessage({ action: "onCatch", pokemonId: id, pokemonLevel: level }, function() {
                 // Remove the pokemon from the DOM.
-                target.removeChild(sprite);
+                target.removeChild(spriteContainer);
                 // We no longer need the capture bar.
                 hideCaptureBar();
             });
@@ -59,6 +66,8 @@ function Spawn(id, level, target) {
 	var showCaptureBar = function () {
         // Create the capture bar.
         captureBar = new CaptureBar("easy");
+        // Add the capture bar element to the sprite container.
+		spriteContainer.appendChild(captureBar.getCaptureBarElement());
         // Start the capture bar pointer tick.
         captureBar.startPointerTick();
 	};
@@ -69,6 +78,8 @@ function Spawn(id, level, target) {
 	var hideCaptureBar = function () {
         // Check that we have a capture bar, just in case.
         if (captureBar) {
+            // Remove the capture bar element from the sprite container.
+		    spriteContainer.removeChild(captureBar.getCaptureBarElement());
             // Stop the capture bar pointer tick.
             captureBar.stopPointerTick();
             captureBar = null;

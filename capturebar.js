@@ -8,6 +8,8 @@ function CaptureBar(difficulty) {
     var isPointerActive = true;
     // The capture bar.
     var captureBarElement;
+    // The capture bar pointer.
+    var captureBarPointerElement;
 
     /**
      * Initialise this pokemon spawn.
@@ -22,8 +24,13 @@ function CaptureBar(difficulty) {
 	 */
 	var createCaptureBar = function () {
         // Create the capture bar element.
-        captureBarElement = document.createElement("div");
-        // ...
+        captureBarElement           = document.createElement("div");
+        captureBarElement.className = "capture-bar-container";
+        // Create the capture bar pointer element.
+        captureBarPointerElement           = document.createElement("img");
+        captureBarPointerElement.className = "capture-bar-pointer";
+	    captureBarPointerElement.setAttribute("src", chrome.extension.getURL("resources/capture_bar_pointer.png"));
+        captureBarElement.appendChild(captureBarPointerElement);
     };
 
     /**
@@ -70,6 +77,13 @@ function CaptureBar(difficulty) {
 	 */
 	this.stopPointerTick = function () {
         isPointerActive = false;
+	};
+
+    /**
+	 * Get the capture bar element.
+	 */
+	this.getCaptureBarElement = function () {
+        return captureBarElement;
 	};
 
     init();
