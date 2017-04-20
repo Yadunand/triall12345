@@ -116,7 +116,7 @@ body {
 
 .capture-bar-container {
     position: absolute;
-    top: -16px;
+    top: -10px;
     left: 0px;
     width: 37px;
     height: 10px;
@@ -127,6 +127,7 @@ body {
 }
 
 .capture-bar-pointer {
+    position: absolute;
     width: 7px;
     height: 10px;
 }

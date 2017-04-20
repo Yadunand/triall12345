@@ -23,11 +23,11 @@ function Spawn(id, level, target) {
         // Inject the sprite container into the target div.
 		target.appendChild(spriteContainer);
         // Add a click listener for the pokemon image.
-		sprite.addEventListener("click", onCaptureAttempt);
+		sprite.addEventListener("mousedown", onCaptureAttempt);
         // Show the capture bar when the sprite is hovered over.
         sprite.addEventListener("mouseover", showCaptureBar);
         // Hise the capture bar when the sprite is not hovered over.
-        //sprite.addEventListener("mouseout", hideCaptureBar);
+        sprite.addEventListener("mouseout", hideCaptureBar);
     };
 
 	/**

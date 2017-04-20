@@ -10,6 +10,8 @@ function CaptureBar(difficulty) {
     var captureBarElement;
     // The capture bar pointer.
     var captureBarPointerElement;
+    // The capture bar pointer movement unit.
+    var pointerMovementUnit;
 
     /**
      * Initialise this pokemon spawn.
@@ -40,13 +42,15 @@ function CaptureBar(difficulty) {
         // If the pointer is not active then do not move it.
         if (!isPointerActive)
             return;
+        // Set the pointer movement unit if it hasn't been.
+        if (!pointerMovementUnit)
+            pointerMovementUnit = (captureBarElement.getBoundingClientRect().width - captureBarPointerElement.getBoundingClientRect().width) / 50;
         // Move the pointer position. Never above 50.
         pointerPosition = (pointerPosition == 50) ? 1 : pointerPosition + 1;
-
-        // TODO Move the pointer elements position in the capture bar. 
-
-        // Call tick again in next 50 ms.
-        setTimeout(tick, 50);
+        // Move the pointer elements position in the capture bar. 
+        captureBarPointerElement.setAttribute("style", "left:" + pointerPosition * pointerMovementUnit + "px;");
+        // Call tick again in next 10 ms.
+        setTimeout(tick, 10);
     };
 
     /**
